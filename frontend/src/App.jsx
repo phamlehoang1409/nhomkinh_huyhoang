@@ -2,12 +2,14 @@ import React from 'react';
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { SiteProvider } from './context/SiteContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 // Layout components
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import FloatingWidget from './components/layout/FloatingWidget';
 import QuoteModal from './components/common/QuoteModal';
+import ChatBot from './components/common/ChatBot';
 
 // Public pages
 import HomePage from './pages/public/HomePage';
@@ -60,13 +62,14 @@ function ProtectedAdminRoute() {
 // Public Master Layout wrapper
 function PublicLayout() {
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100 selection:bg-amber-500 selection:text-slate-950">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-amber-500 selection:text-slate-950 transition-colors duration-200">
       <Header />
-      <main className="flex-grow">
+      <main className="flex-grow pb-16 sm:pb-0">
         <Outlet />
       </main>
       <Footer />
       <FloatingWidget />
+      <ChatBot />
       <QuoteModal />
     </div>
   );
@@ -74,44 +77,46 @@ function PublicLayout() {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <SiteProvider>
-        <Routes>
-          {/* Public Routes */}
-          <Route element={<PublicLayout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/gioi-thieu" element={<AboutPage />} />
-            <Route path="/dich-vu" element={<ServicesPage />} />
-            <Route path="/dich-vu/:slug" element={<ServiceDetailPage />} />
-            <Route path="/san-pham" element={<ProductsPage />} />
-            <Route path="/san-pham/:slug" element={<ProductDetailPage />} />
-            <Route path="/cong-trinh" element={<ProjectsPage />} />
-            <Route path="/tin-tuc" element={<ArticlesPage />} />
-            <Route path="/tin-tuc/:slug" element={<ArticleDetailPage />} />
-            <Route path="/lien-he" element={<ContactPage />} />
-            <Route path="/tim-kiem" element={<SearchPage />} />
-            <Route path="/chinh-sach" element={<PolicyPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Route>
+    <ThemeProvider>
+      <AuthProvider>
+        <SiteProvider>
+          <Routes>
+            {/* Public Routes */}
+            <Route element={<PublicLayout />}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/gioi-thieu" element={<AboutPage />} />
+              <Route path="/dich-vu" element={<ServicesPage />} />
+              <Route path="/dich-vu/:slug" element={<ServiceDetailPage />} />
+              <Route path="/san-pham" element={<ProductsPage />} />
+              <Route path="/san-pham/:slug" element={<ProductDetailPage />} />
+              <Route path="/cong-trinh" element={<ProjectsPage />} />
+              <Route path="/tin-tuc" element={<ArticlesPage />} />
+              <Route path="/tin-tuc/:slug" element={<ArticleDetailPage />} />
+              <Route path="/lien-he" element={<ContactPage />} />
+              <Route path="/tim-kiem" element={<SearchPage />} />
+              <Route path="/chinh-sach" element={<PolicyPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Route>
 
-          {/* Admin Login Route */}
-          <Route path="/admin/login" element={<AdminLoginPage />} />
+            {/* Admin Login Route */}
+            <Route path="/admin/login" element={<AdminLoginPage />} />
 
-          {/* Protected Admin Routes */}
-          <Route path="/admin" element={<ProtectedAdminRoute />}>
-            <Route index element={<AdminDashboard />} />
-            <Route path="quotes" element={<AdminQuotes />} />
-            <Route path="products" element={<AdminProducts />} />
-            <Route path="categories" element={<AdminCategories />} />
-            <Route path="services" element={<AdminServices />} />
-            <Route path="projects" element={<AdminProjects />} />
-            <Route path="articles" element={<AdminArticles />} />
-            <Route path="reviews" element={<AdminReviews />} />
-            <Route path="settings" element={<AdminSettings />} />
-            <Route path="profile" element={<AdminProfile />} />
-          </Route>
-        </Routes>
-      </SiteProvider>
-    </AuthProvider>
+            {/* Protected Admin Routes */}
+            <Route path="/admin" element={<ProtectedAdminRoute />}>
+              <Route index element={<AdminDashboard />} />
+              <Route path="quotes" element={<AdminQuotes />} />
+              <Route path="products" element={<AdminProducts />} />
+              <Route path="categories" element={<AdminCategories />} />
+              <Route path="services" element={<AdminServices />} />
+              <Route path="projects" element={<AdminProjects />} />
+              <Route path="articles" element={<AdminArticles />} />
+              <Route path="reviews" element={<AdminReviews />} />
+              <Route path="settings" element={<AdminSettings />} />
+              <Route path="profile" element={<AdminProfile />} />
+            </Route>
+          </Routes>
+        </SiteProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
