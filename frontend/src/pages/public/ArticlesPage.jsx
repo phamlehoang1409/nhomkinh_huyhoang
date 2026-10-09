@@ -77,26 +77,26 @@ export default function ArticlesPage() {
 
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-4">
-        <span className="text-xs font-bold text-amber-400 uppercase tracking-widest block">
+        <span className="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest block">
           CẨM NANG NHÔM KÍNH
         </span>
-        <h1 className="text-3xl sm:text-4xl font-black text-white">
+        <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">
           Kinh Nghiệm, Tư Vấn & Hướng Dẫn
         </h1>
-        <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
           Chia sẻ kiến thức bổ ích về cách chọn cửa nhôm Xingfa chính hãng, bảo quản cửa kính, mẹo phong thủy cửa chính và kỹ thuật thi công chuẩn.
         </p>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl shadow-sm">
         <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={() => handleCategorySelect('')}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-colors ${
               !currentCategory
                 ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20'
-                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
             }`}
           >
             Tất cả bài viết
@@ -108,7 +108,7 @@ export default function ArticlesPage() {
               className={`px-4 py-2 rounded-xl text-xs font-semibold transition-colors ${
                 currentCategory === c.id.toString()
                   ? 'bg-amber-500 text-slate-950 font-bold shadow-md shadow-amber-500/20'
-                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
               }`}
             >
               {c.name}
@@ -122,7 +122,7 @@ export default function ArticlesPage() {
             placeholder="Tìm bài viết..."
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs text-white focus:border-amber-500 focus:outline-none"
+            className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-900 dark:text-white focus:border-amber-500 focus:outline-none"
           />
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
         </form>
@@ -130,9 +130,9 @@ export default function ArticlesPage() {
 
       {/* Articles Grid */}
       {loading ? (
-        <div className="text-center py-20 text-slate-400 text-sm">Đang tải bài viết...</div>
+        <div className="text-center py-20 text-slate-500 dark:text-slate-400 text-sm">Đang tải bài viết...</div>
       ) : articles.length === 0 ? (
-        <div className="text-center py-16 bg-slate-900 border border-slate-800 rounded-2xl text-slate-400 text-sm">
+        <div className="text-center py-16 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl text-slate-600 dark:text-slate-400 text-sm shadow-sm">
           Không tìm thấy bài viết nào.
         </div>
       ) : (

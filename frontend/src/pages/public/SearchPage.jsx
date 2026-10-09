@@ -60,8 +60,8 @@ export default function SearchPage() {
       <Breadcrumb items={[{ label: 'Tìm kiếm' }]} />
 
       {/* Search Header Form */}
-      <div className="bg-slate-900 border border-slate-800 p-6 sm:p-10 rounded-3xl space-y-6">
-        <h1 className="text-2xl sm:text-3xl font-black text-white text-center">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-10 rounded-3xl space-y-6 shadow-sm">
+        <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white text-center">
           Tìm Kiếm Thông Tin
         </h1>
 
@@ -71,7 +71,7 @@ export default function SearchPage() {
             placeholder="Nhập tên sản phẩm, mã cửa, dịch vụ hoặc kinh nghiệm..."
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
-            className="w-full bg-slate-800 border border-slate-700 rounded-2xl pl-11 pr-28 py-3.5 text-sm text-white placeholder-slate-400 focus:border-amber-500 focus:outline-none shadow-inner"
+            className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-2xl pl-11 pr-28 py-3.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:border-amber-500 focus:outline-none shadow-inner"
           />
           <Search className="w-5 h-5 text-slate-400 absolute left-4 pointer-events-none" />
           <button
@@ -83,21 +83,21 @@ export default function SearchPage() {
         </form>
 
         {queryParam && (
-          <p className="text-center text-xs sm:text-sm text-slate-400">
-            Tìm thấy <strong className="text-amber-400">{totalResults}</strong> kết quả cho từ khóa: <strong className="text-white">"{queryParam}"</strong>
+          <p className="text-center text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+            Tìm thấy <strong className="text-amber-600 dark:text-amber-400">{totalResults}</strong> kết quả cho từ khóa: <strong className="text-slate-900 dark:text-white">"{queryParam}"</strong>
           </p>
         )}
       </div>
 
       {/* Tabs */}
       {queryParam && (
-        <div className="flex items-center justify-center gap-2 border-b border-slate-800 pb-4">
+        <div className="flex items-center justify-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-4">
           <button
             onClick={() => handleTabChange('all')}
             className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-colors ${
               typeParam === 'all'
-                ? 'bg-amber-500 text-slate-950'
-                : 'bg-slate-900 text-slate-400 hover:text-white'
+                ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20'
+                : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             Tất cả ({totalResults})
@@ -106,8 +106,8 @@ export default function SearchPage() {
             onClick={() => handleTabChange('products')}
             className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-colors ${
               typeParam === 'products'
-                ? 'bg-amber-500 text-slate-950'
-                : 'bg-slate-900 text-slate-400 hover:text-white'
+                ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20'
+                : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             Sản phẩm ({results.products?.length || 0})
@@ -116,8 +116,8 @@ export default function SearchPage() {
             onClick={() => handleTabChange('services')}
             className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-colors ${
               typeParam === 'services'
-                ? 'bg-amber-500 text-slate-950'
-                : 'bg-slate-900 text-slate-400 hover:text-white'
+                ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20'
+                : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             Dịch vụ ({results.services?.length || 0})
@@ -126,8 +126,8 @@ export default function SearchPage() {
             onClick={() => handleTabChange('articles')}
             className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-colors ${
               typeParam === 'articles'
-                ? 'bg-amber-500 text-slate-950'
-                : 'bg-slate-900 text-slate-400 hover:text-white'
+                ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20'
+                : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             Bài viết ({results.articles?.length || 0})
@@ -137,12 +137,12 @@ export default function SearchPage() {
 
       {/* Results Content */}
       {loading ? (
-        <div className="text-center py-20 text-slate-400 text-sm">Đang tìm kiếm dữ liệu...</div>
+        <div className="text-center py-20 text-slate-500 dark:text-slate-400 text-sm">Đang tìm kiếm dữ liệu...</div>
       ) : totalResults === 0 && queryParam ? (
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-12 text-center space-y-4">
-          <PackageX className="w-12 h-12 text-slate-600 mx-auto" />
-          <h3 className="text-lg font-bold text-white">Không tìm thấy kết quả nào</h3>
-          <p className="text-xs sm:text-sm text-slate-400 max-w-md mx-auto">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-12 text-center space-y-4 shadow-sm">
+          <PackageX className="w-12 h-12 text-slate-400 dark:text-slate-600 mx-auto" />
+          <h3 className="text-lg font-bold text-slate-900 dark:text-white">Không tìm thấy kết quả nào</h3>
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-md mx-auto">
             Không có sản phẩm, dịch vụ hoặc bài viết nào khớp với từ khóa "{queryParam}". Vui lòng thử lại với từ khóa khác hoặc liên hệ hotline.
           </p>
         </div>
@@ -151,7 +151,7 @@ export default function SearchPage() {
           {/* Products */}
           {(typeParam === 'all' || typeParam === 'products') && results.products?.length > 0 && (
             <div className="space-y-6">
-              <h2 className="text-xl font-bold text-white border-l-2 border-amber-500 pl-3">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white border-l-4 border-amber-500 pl-3">
                 Sản phẩm tìm thấy ({results.products.length})
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -165,7 +165,7 @@ export default function SearchPage() {
           {/* Services */}
           {(typeParam === 'all' || typeParam === 'services') && results.services?.length > 0 && (
             <div className="space-y-6">
-              <h2 className="text-xl font-bold text-white border-l-2 border-amber-500 pl-3">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white border-l-4 border-amber-500 pl-3">
                 Dịch vụ tìm thấy ({results.services.length})
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -179,7 +179,7 @@ export default function SearchPage() {
           {/* Articles */}
           {(typeParam === 'all' || typeParam === 'articles') && results.articles?.length > 0 && (
             <div className="space-y-6">
-              <h2 className="text-xl font-bold text-white border-l-2 border-amber-500 pl-3">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white border-l-4 border-amber-500 pl-3">
                 Bài viết & Kinh nghiệm ({results.articles.length})
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

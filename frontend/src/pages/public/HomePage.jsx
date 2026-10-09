@@ -146,43 +146,43 @@ export default function HomePage() {
       {/* 2. VALUE PROPOSITIONS STRIP */}
       <section className="max-w-7xl mx-auto px-4 -mt-10 sm:-mt-14 relative z-20">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-lg flex items-start gap-4">
+            <div className="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-500 dark:text-amber-400 flex items-center justify-center shrink-0">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="font-bold text-white text-sm mb-1">Chất lượng cam kết</h4>
-              <p className="text-xs text-slate-400">Vật tư nhôm, kính và phụ kiện đúng quy cách, chính hãng 100%.</p>
+              <h4 className="font-bold text-slate-900 dark:text-white text-sm mb-1">Chất lượng cam kết</h4>
+              <p className="text-xs text-slate-600 dark:text-slate-400">Vật tư nhôm, kính và phụ kiện đúng quy cách, chính hãng 100%.</p>
             </div>
           </div>
 
-          <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-lg flex items-start gap-4">
+            <div className="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-500 dark:text-amber-400 flex items-center justify-center shrink-0">
               <Award className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="font-bold text-white text-sm mb-1">Thợ tay nghề cao</h4>
-              <p className="text-xs text-slate-400">Gia công góc cắt sắc nét, đường keo kín khít chống nước triệt để.</p>
+              <h4 className="font-bold text-slate-900 dark:text-white text-sm mb-1">Thợ tay nghề cao</h4>
+              <p className="text-xs text-slate-600 dark:text-slate-400">Gia công góc cắt sắc nét, đường keo kín khít chống nước triệt để.</p>
             </div>
           </div>
 
-          <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-lg flex items-start gap-4">
+            <div className="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-500 dark:text-amber-400 flex items-center justify-center shrink-0">
               <Clock className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="font-bold text-white text-sm mb-1">Đúng tiến độ</h4>
-              <p className="text-xs text-slate-400">Sản xuất và lắp đặt nhanh chóng, bàn giao đúng hẹn thỏa thuận.</p>
+              <h4 className="font-bold text-slate-900 dark:text-white text-sm mb-1">Đúng tiến độ</h4>
+              <p className="text-xs text-slate-600 dark:text-slate-400">Sản xuất và lắp đặt nhanh chóng, bàn giao đúng hẹn thỏa thuận.</p>
             </div>
           </div>
 
-          <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-lg flex items-start gap-4">
+            <div className="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-500 dark:text-amber-400 flex items-center justify-center shrink-0">
               <Wrench className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="font-bold text-white text-sm mb-1">Bảo hành dài hạn</h4>
-              <p className="text-xs text-slate-400">Hỗ trợ kỹ thuật và bảo trì định kỳ chu đáo, tận tâm.</p>
+              <h4 className="font-bold text-slate-900 dark:text-white text-sm mb-1">Bảo hành dài hạn</h4>
+              <p className="text-xs text-slate-600 dark:text-slate-400">Hỗ trợ kỹ thuật và bảo trì định kỳ chu đáo, tận tâm.</p>
             </div>
           </div>
         </div>
@@ -191,13 +191,13 @@ export default function HomePage() {
       {/* 3. FEATURED SERVICES SECTION */}
       <section className="max-w-7xl mx-auto px-4">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-xs font-bold text-amber-400 uppercase tracking-widest block mb-2">
+          <span className="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest block mb-2">
             HẠNG MỤC THI CÔNG
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 dark:text-white">
             Dịch Vụ Nhôm Kính Chuyên Nghiệp
           </h2>
-          <p className="text-xs sm:text-sm text-slate-400 mt-3">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-3">
             Đầy đủ các giải pháp nhôm kính cho nhà phố, biệt thự, văn phòng, cửa hàng tại Thanh Hóa.
           </p>
         </div>
@@ -211,7 +211,7 @@ export default function HomePage() {
         <div className="text-center mt-10">
           <Link
             to="/dich-vu"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-amber-400 font-bold text-sm transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 text-amber-600 dark:text-amber-400 font-bold text-sm shadow-sm transition-colors"
           >
             <span>Xem tất cả dịch vụ</span>
             <ChevronRight className="w-4 h-4" />
@@ -220,19 +220,19 @@ export default function HomePage() {
       </section>
 
       {/* 4. POPULAR PRODUCTS SECTION */}
-      <section className="max-w-7xl mx-auto px-4 bg-slate-900/40 p-6 sm:p-10 rounded-3xl border border-slate-800/80">
+      <section className="max-w-7xl mx-auto px-4 bg-slate-50 dark:bg-slate-900/40 p-6 sm:p-10 rounded-3xl border border-slate-200 dark:border-slate-800/80 shadow-sm">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
           <div>
-            <span className="text-xs font-bold text-amber-400 uppercase tracking-widest block mb-2">
+            <span className="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest block mb-2">
               MẪU CỬA ĐẸP & HIỆN ĐẠI
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-white">
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
               Sản Phẩm Được Quan Tâm Nhiều
             </h2>
           </div>
           <Link
             to="/san-pham"
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-amber-400 hover:text-amber-300"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-amber-600 dark:text-amber-400 hover:underline"
           >
             <span>Xem toàn bộ danh mục</span>
             <ArrowRight className="w-4 h-4" />
@@ -249,10 +249,10 @@ export default function HomePage() {
       {/* 5. 5-STEP WORKFLOW */}
       <section className="max-w-7xl mx-auto px-4">
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <span className="text-xs font-bold text-amber-400 uppercase tracking-widest block mb-2">
+          <span className="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest block mb-2">
             QUY TRÌNH CHUẨN KỸ THUẬT
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 dark:text-white">
             5 Bước Làm Việc Chuyên Nghiệp
           </h2>
         </div>
@@ -265,13 +265,13 @@ export default function HomePage() {
             { step: '04', title: 'Gia công sản xuất', desc: 'Cắt ghép góc ép thủy lực kín khít bằng máy móc chuyên dụng tại xưởng.' },
             { step: '05', title: 'Lắp đặt & Bảo hành', desc: 'Vận chuyển, lắp ráp hoàn thiện, kiểm tra vận hành và bàn giao phiếu bảo hành.' }
           ].map((item, idx) => (
-            <div key={idx} className="bg-slate-900 border border-slate-800 p-6 rounded-2xl relative flex flex-col justify-between group hover:border-amber-500/50 transition-colors">
+            <div key={idx} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm relative flex flex-col justify-between group hover:border-amber-500 hover:shadow-md transition-all">
               <div>
-                <span className="text-3xl font-black text-amber-500/30 group-hover:text-amber-500 transition-colors block mb-3">
+                <span className="text-3xl font-black text-amber-500/40 group-hover:text-amber-500 transition-colors block mb-3">
                   {item.step}
                 </span>
-                <h3 className="font-bold text-base text-white mb-2">{item.title}</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
+                <h3 className="font-bold text-base text-slate-900 dark:text-white mb-2">{item.title}</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{item.desc}</p>
               </div>
             </div>
           ))}
@@ -283,16 +283,16 @@ export default function HomePage() {
         <section className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
             <div>
-              <span className="text-xs font-bold text-amber-400 uppercase tracking-widest block mb-2">
+              <span className="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest block mb-2">
                 HÌNH ẢNH THỰC TẾ
               </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-white">
+              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
                 Công Trình Đã Thi Công
               </h2>
             </div>
             <Link
               to="/cong-trinh"
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-amber-400 hover:text-amber-300"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-amber-600 dark:text-amber-400 hover:underline"
             >
               <span>Xem thêm công trình</span>
               <ArrowRight className="w-4 h-4" />
@@ -312,28 +312,28 @@ export default function HomePage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Reviews */}
           <div>
-            <span className="text-xs font-bold text-amber-400 uppercase tracking-widest block mb-2">
+            <span className="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest block mb-2">
               Ý KIẾN KHÁCH HÀNG
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-white mb-6">
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-6">
               Khách Hàng Đánh Giá
             </h2>
 
             <div className="space-y-4">
               {reviews.slice(0, 3).map((r) => (
-                <div key={r.id} className="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-3">
+                <div key={r.id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm space-y-3">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-1 text-amber-400">
+                    <div className="flex items-center gap-1 text-amber-500">
                       {[...Array(r.rating || 5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-amber-400" />
+                        <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
                       ))}
                     </div>
                     <span className="text-xs text-slate-500">{r.address_or_role}</span>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed italic">
+                  <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed italic">
                     "{r.comment}"
                   </p>
-                  <p className="font-bold text-xs text-amber-400">{r.customer_name}</p>
+                  <p className="font-bold text-xs text-amber-600 dark:text-amber-400">{r.customer_name}</p>
                 </div>
               ))}
             </div>
@@ -341,10 +341,10 @@ export default function HomePage() {
 
           {/* FAQ Accordion */}
           <div>
-            <span className="text-xs font-bold text-amber-400 uppercase tracking-widest block mb-2">
+            <span className="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest block mb-2">
               GIẢI ĐÁP THẮC MẮC
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-white mb-6">
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-6">
               Câu Hỏi Thường Gặp
             </h2>
 
@@ -352,17 +352,17 @@ export default function HomePage() {
               {faqs.map((faq, idx) => (
                 <div
                   key={idx}
-                  className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden transition-colors"
+                  className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm transition-colors"
                 >
                   <button
                     onClick={() => setOpenFaq(openFaq === idx ? -1 : idx)}
-                    className="w-full text-left p-4 font-bold text-sm text-white flex items-center justify-between gap-3 hover:text-amber-400"
+                    className="w-full text-left p-4 font-bold text-sm text-slate-900 dark:text-white flex items-center justify-between gap-3 hover:text-amber-600 dark:hover:text-amber-400"
                   >
                     <span>{faq.q}</span>
-                    <ChevronRight className={`w-4 h-4 text-amber-400 transition-transform ${openFaq === idx ? 'rotate-90' : ''}`} />
+                    <ChevronRight className={`w-4 h-4 text-amber-500 transition-transform ${openFaq === idx ? 'rotate-90' : ''}`} />
                   </button>
                   {openFaq === idx && (
-                    <div className="p-4 pt-0 text-xs text-slate-400 leading-relaxed border-t border-slate-800/60 mt-1">
+                    <div className="p-4 pt-0 text-xs text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-slate-800/60 mt-1">
                       {faq.a}
                     </div>
                   )}
@@ -378,16 +378,16 @@ export default function HomePage() {
         <section className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
             <div>
-              <span className="text-xs font-bold text-amber-400 uppercase tracking-widest block mb-2">
+              <span className="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest block mb-2">
                 KIẾN THỨC & MẸO HAY
               </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-white">
+              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
                 Kinh Nghiệm Nhôm Kính
               </h2>
             </div>
             <Link
               to="/tin-tuc"
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-amber-400 hover:text-amber-300"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-amber-600 dark:text-amber-400 hover:text-amber-500"
             >
               <span>Xem tất cả bài viết</span>
               <ArrowRight className="w-4 h-4" />
@@ -406,7 +406,7 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4">
         <div className="bg-gradient-to-r from-amber-600 via-amber-500 to-yellow-500 rounded-3xl p-8 sm:p-12 text-slate-950 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="space-y-3 max-w-xl text-center md:text-left">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-950">
               Cần Khảo Sát & Báo Giá Cửa Nhôm Kính?
             </h2>
             <p className="text-sm font-medium text-slate-900 leading-relaxed">

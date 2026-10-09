@@ -5,9 +5,9 @@ import { Home, ArrowLeft } from 'lucide-react';
 export default function NotFoundPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-24 text-center space-y-6">
-      <div className="text-8xl font-black text-amber-500/20">404</div>
-      <h1 className="text-3xl font-black text-white">Trang Không Tồn Tại</h1>
-      <p className="text-sm text-slate-400 max-w-md mx-auto">
+      <div className="text-8xl font-black text-amber-500/30">404</div>
+      <h1 className="text-3xl font-black text-slate-900 dark:text-white">Trang Không Tồn Tại</h1>
+      <p className="text-sm text-slate-600 dark:text-slate-400 max-w-md mx-auto">
         Đường dẫn quý khách đang tìm kiếm không tồn tại hoặc đã được thay đổi trên hệ thống.
       </p>
       <div className="flex items-center justify-center gap-4 pt-4">
@@ -20,7 +20,7 @@ export default function NotFoundPage() {
         </Link>
         <Link
           to="/san-pham"
-          className="px-6 py-3 bg-slate-900 border border-slate-700 hover:bg-slate-800 text-slate-200 font-bold rounded-xl text-sm transition-colors"
+          className="px-6 py-3 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-slate-200 font-bold rounded-xl text-sm transition-colors shadow-sm"
         >
           Xem Sản Phẩm
         </Link>

@@ -98,19 +98,19 @@ export default function ProductsPage() {
       />
 
       {/* Page Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-slate-800">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
         <div>
-          <span className="text-xs font-bold text-amber-400 uppercase tracking-widest block mb-1">
+          <span className="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest block mb-1">
             DANH MỤC CỬA & PHỤ KIỆN
           </span>
-          <h1 className="text-2xl sm:text-3xl font-black text-white">
+          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
             {currentCategorySlug
               ? categories.find(c => c.slug === currentCategorySlug)?.name || 'Sản Phẩm Nhôm Kính'
               : 'Tất Cả Sản Phẩm Nhôm Kính'}
           </h1>
         </div>
-        <p className="text-xs sm:text-sm text-slate-400">
-          Hiển thị <strong>{pagination.total}</strong> sản phẩm mẫu chuẩn
+        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+          Hiển thị <strong className="text-slate-900 dark:text-white">{pagination.total}</strong> sản phẩm mẫu chuẩn
         </p>
       </div>
 
@@ -119,8 +119,8 @@ export default function ProductsPage() {
         {/* Sidebar Filters (1 col) */}
         <div className="space-y-6">
           {/* Search Box */}
-          <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
-            <h3 className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-3">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm">
+            <h3 className="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-3">
               Tìm kiếm sản phẩm
             </h3>
             <form onSubmit={handleSearchSubmit} className="relative">
@@ -129,25 +129,25 @@ export default function ProductsPage() {
                 placeholder="Mã hoặc tên cửa..."
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
-                className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs sm:text-sm text-white focus:border-amber-500 focus:outline-none"
+                className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:border-amber-500 focus:outline-none"
               />
               <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
             </form>
           </div>
 
           {/* Category Tabs */}
-          <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
-            <h3 className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm">
+            <h3 className="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-3 flex items-center gap-2">
               <Filter className="w-4 h-4" />
               <span>Danh mục sản phẩm</span>
             </h3>
             <div className="space-y-1">
               <button
                 onClick={() => handleCategorySelect('')}
-                className={`w-full text-left px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors flex items-center justify-between ${
+                className={`w-full text-left px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center justify-between ${
                   !currentCategorySlug
-                    ? 'bg-amber-500 text-slate-950 font-bold'
-                    : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                    ? 'bg-amber-500 text-slate-950 font-bold shadow-md shadow-amber-500/20'
+                    : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <span>Tất cả sản phẩm</span>
@@ -156,15 +156,15 @@ export default function ProductsPage() {
                 <button
                   key={c.id}
                   onClick={() => handleCategorySelect(c.slug)}
-                  className={`w-full text-left px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors flex items-center justify-between ${
+                  className={`w-full text-left px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center justify-between ${
                     currentCategorySlug === c.slug
-                      ? 'bg-amber-500 text-slate-950 font-bold'
-                      : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                      ? 'bg-amber-500 text-slate-950 font-bold shadow-md shadow-amber-500/20'
+                      : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
                   <span className="line-clamp-1">{c.name}</span>
                   {c.product_count !== undefined && (
-                    <span className="text-[11px] px-2 py-0.5 rounded-md bg-slate-800 text-slate-400">
+                    <span className="text-[11px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-bold">
                       {c.product_count}
                     </span>
                   )}
@@ -177,22 +177,24 @@ export default function ProductsPage() {
         {/* Products Grid (3 cols) */}
         <div className="lg:col-span-3 space-y-6">
           {/* Controls bar */}
-          <div className="flex flex-wrap items-center justify-between gap-4 bg-slate-900 border border-slate-800 p-3.5 rounded-2xl">
-            <span className="text-xs text-slate-400">
-              {currentSearch && (
-                <span>Kết quả cho: <strong className="text-amber-400">"{currentSearch}"</strong></span>
+          <div className="flex flex-wrap items-center justify-between gap-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3.5 rounded-2xl shadow-sm">
+            <span className="text-xs text-slate-600 dark:text-slate-400 font-medium">
+              {currentSearch ? (
+                <span>Kết quả cho: <strong className="text-amber-600 dark:text-amber-400">"{currentSearch}"</strong></span>
+              ) : (
+                <span>Danh sách mẫu cửa hoàn thiện</span>
               )}
             </span>
 
             <div className="flex items-center gap-2 ml-auto">
-              <span className="text-xs text-slate-400 flex items-center gap-1">
+              <span className="text-xs text-slate-600 dark:text-slate-400 flex items-center gap-1 font-medium">
                 <SlidersHorizontal className="w-3.5 h-3.5" />
                 <span>Sắp xếp:</span>
               </span>
               <select
                 value={currentSort}
                 onChange={handleSortChange}
-                className="bg-slate-800 border border-slate-700 text-white text-xs rounded-xl px-3 py-1.5 focus:outline-none focus:border-amber-500"
+                className="bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-white text-xs rounded-xl px-3 py-1.5 focus:outline-none focus:border-amber-500 font-medium"
               >
                 <option value="newest">Mới nhất</option>
                 <option value="oldest">Cũ nhất</option>
@@ -204,14 +206,14 @@ export default function ProductsPage() {
 
           {/* Products List */}
           {loading ? (
-            <div className="text-center py-20 text-slate-400 text-sm">
+            <div className="text-center py-20 text-slate-500 dark:text-slate-400 text-sm">
               Đang tải danh sách sản phẩm...
             </div>
           ) : products.length === 0 ? (
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-12 text-center space-y-4">
-              <PackageX className="w-12 h-12 text-slate-600 mx-auto" />
-              <h3 className="text-lg font-bold text-white">Không tìm thấy sản phẩm phù hợp</h3>
-              <p className="text-xs sm:text-sm text-slate-400 max-w-md mx-auto">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-12 text-center space-y-4 shadow-sm">
+              <PackageX className="w-12 h-12 text-slate-400 dark:text-slate-600 mx-auto" />
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">Không tìm thấy sản phẩm phù hợp</h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-md mx-auto">
                 Quý khách vui lòng thử tìm với từ khóa khác hoặc liên hệ trực tiếp hotline để được tư vấn mẫu mã theo yêu cầu riêng.
               </p>
               <button
@@ -219,7 +221,7 @@ export default function ProductsPage() {
                   setSearchParams({});
                   setSearchInput('');
                 }}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold rounded-xl"
+                className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-amber-600 dark:text-amber-400 text-xs font-bold rounded-xl transition-colors"
               >
                 Xem tất cả sản phẩm
               </button>

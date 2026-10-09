@@ -104,21 +104,21 @@ export default function QuoteModal() {
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="relative bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-xl shadow-2xl overflow-hidden animate-scaleUp">
+      <div className="relative bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-xl shadow-2xl overflow-hidden animate-scaleUp">
         {/* Header */}
-        <div className="bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 p-5 border-b border-slate-800 flex items-center justify-between">
+        <div className="bg-slate-50 dark:bg-gradient-to-r dark:from-slate-900 dark:via-slate-850 dark:to-slate-900 p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
           <div>
-            <h3 className="text-lg sm:text-xl font-black text-white flex items-center gap-2">
+            <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
               Yêu cầu Tư vấn & Nhận Báo giá
             </h3>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
               Khảo sát đo đạc thực tế tại công trình miễn phí tại Thanh Hóa
             </p>
           </div>
           <button
             onClick={closeQuoteModal}
-            className="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
+            className="p-1.5 text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -128,23 +128,23 @@ export default function QuoteModal() {
         <div className="p-6">
           {successMsg ? (
             <div className="text-center py-8 space-y-4">
-              <div className="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto">
+              <div className="w-16 h-16 bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-10 h-10" />
               </div>
-              <h4 className="text-xl font-bold text-white">Yêu cầu đã được gửi!</h4>
-              <p className="text-sm text-slate-300 max-w-md mx-auto">{successMsg}</p>
-              <div className="p-4 bg-slate-800/60 rounded-xl text-xs text-slate-300 space-y-1">
+              <h4 className="text-xl font-bold text-slate-900 dark:text-white">Yêu cầu đã được gửi!</h4>
+              <p className="text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto">{successMsg}</p>
+              <div className="p-4 bg-slate-50 dark:bg-slate-800/60 rounded-xl text-xs text-slate-600 dark:text-slate-300 space-y-1">
                 <p>Cần hỗ trợ gấp? Gọi ngay cho chúng tôi:</p>
                 <a
                   href={`tel:${settings.hotline || '0978398567'}`}
-                  className="font-bold text-amber-400 text-base block hover:underline"
+                  className="font-bold text-amber-600 dark:text-amber-400 text-base block hover:underline"
                 >
                   Hotline: {settings.hotline || '0978398567'}
                 </a>
               </div>
               <button
                 onClick={closeQuoteModal}
-                className="mt-4 px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-xl text-sm transition-colors"
+                className="mt-4 px-6 py-2.5 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-semibold rounded-xl text-sm transition-colors"
               >
                 Đóng cửa sổ
               </button>
@@ -152,8 +152,8 @@ export default function QuoteModal() {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               {errorMsg && (
-                <div className="p-3 bg-rose-500/10 border border-rose-500/30 rounded-xl flex items-center gap-3 text-rose-300 text-xs">
-                  <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
+                <div className="p-3 bg-rose-500/10 border border-rose-500/30 rounded-xl flex items-center gap-3 text-rose-600 dark:text-rose-300 text-xs font-medium">
+                  <AlertCircle className="w-4 h-4 shrink-0 text-rose-500" />
                   <span>{errorMsg}</span>
                 </div>
               )}
@@ -161,8 +161,8 @@ export default function QuoteModal() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Name */}
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                    Họ và tên quý khách <span className="text-rose-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                    Họ và tên quý khách <span className="text-rose-500">*</span>
                   </label>
                   <div className="relative">
                     <input
@@ -172,7 +172,7 @@ export default function QuoteModal() {
                       placeholder="Ví dụ: Anh Tuấn"
                       value={formData.customer_name}
                       onChange={handleChange}
-                      className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-sm text-white focus:border-amber-500 focus:outline-none"
+                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-9 pr-3 py-2 text-sm text-slate-900 dark:text-white focus:border-amber-500 focus:outline-none"
                     />
                     <User className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
                   </div>
@@ -180,8 +180,8 @@ export default function QuoteModal() {
 
                 {/* Phone */}
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                    Số điện thoại / Zalo <span className="text-rose-400">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                    Số điện thoại / Zalo <span className="text-rose-500">*</span>
                   </label>
                   <div className="relative">
                     <input
@@ -191,7 +191,7 @@ export default function QuoteModal() {
                       placeholder="0978 398 567"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-sm text-white focus:border-amber-500 focus:outline-none"
+                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-9 pr-3 py-2 text-sm text-slate-900 dark:text-white focus:border-amber-500 focus:outline-none"
                     />
                     <Phone className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
                   </div>
@@ -201,14 +201,14 @@ export default function QuoteModal() {
               {/* Service & Address */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                     Hạng mục cần làm
                   </label>
                   <select
                     name="service_name"
                     value={formData.service_name}
                     onChange={handleChange}
-                    className="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:border-amber-500 focus:outline-none"
+                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white focus:border-amber-500 focus:outline-none font-medium"
                   >
                     {services.map((s) => (
                       <option key={s.id} value={s.name}>
@@ -220,7 +220,7 @@ export default function QuoteModal() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                     Địa chỉ công trình (Xã/Huyện)
                   </label>
                   <div className="relative">
@@ -230,7 +230,7 @@ export default function QuoteModal() {
                       placeholder="Ví dụ: Thọ Hải, Thọ Xuân"
                       value={formData.address}
                       onChange={handleChange}
-                      className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-sm text-white focus:border-amber-500 focus:outline-none"
+                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-9 pr-3 py-2 text-sm text-slate-900 dark:text-white focus:border-amber-500 focus:outline-none"
                     />
                     <MapPin className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
                   </div>
@@ -239,7 +239,7 @@ export default function QuoteModal() {
 
               {/* Dimensions */}
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                   Kích thước dự kiến hoặc số lượng (nếu có)
                 </label>
                 <input
@@ -248,13 +248,13 @@ export default function QuoteModal() {
                   placeholder="Ví dụ: Cửa 4 cánh R3m x C2.8m, 3 cửa sổ"
                   value={formData.dimensions}
                   onChange={handleChange}
-                  className="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:border-amber-500 focus:outline-none"
+                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white focus:border-amber-500 focus:outline-none"
                 />
               </div>
 
               {/* Note */}
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                   Ghi chú yêu cầu thêm
                 </label>
                 <textarea
@@ -263,13 +263,13 @@ export default function QuoteModal() {
                   placeholder="Ghi chú về màu sắc nhôm (ghi xám, nâu cafe...), loại kính, thời gian muốn khảo sát..."
                   value={formData.note}
                   onChange={handleChange}
-                  className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm text-white focus:border-amber-500 focus:outline-none resize-none"
+                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl p-3 text-sm text-slate-900 dark:text-white focus:border-amber-500 focus:outline-none resize-none"
                 ></textarea>
               </div>
 
               {/* Upload image / drawing */}
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                   Đính kèm bản vẽ / ảnh thực tế (tối đa 3 ảnh)
                 </label>
                 <input
@@ -277,10 +277,10 @@ export default function QuoteModal() {
                   multiple
                   accept="image/*"
                   onChange={handleImageChange}
-                  className="w-full text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-slate-800 file:text-amber-400 hover:file:bg-slate-700 cursor-pointer"
+                  className="w-full text-xs text-slate-500 dark:text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-slate-100 dark:file:bg-slate-800 file:text-amber-600 dark:file:text-amber-400 hover:file:bg-slate-200 dark:hover:file:bg-slate-700 cursor-pointer"
                 />
                 {images.length > 0 && (
-                  <p className="text-[11px] text-amber-400 mt-1">Đã chọn {images.length} tệp đính kèm.</p>
+                  <p className="text-[11px] text-amber-600 dark:text-amber-400 mt-1 font-semibold">Đã chọn {images.length} tệp đính kèm.</p>
                 )}
               </div>
 
@@ -288,7 +288,7 @@ export default function QuoteModal() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full mt-2 py-3 bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-500 hover:opacity-95 text-slate-950 font-bold rounded-xl text-sm transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full mt-2 py-3 bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-500 hover:opacity-95 text-slate-950 font-bold rounded-xl text-sm transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
               >
                 {submitting ? (
                   <span>Đang gửi thông tin...</span>
