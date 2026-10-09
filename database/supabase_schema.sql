@@ -4,6 +4,21 @@
 -- Supabase Dashboard -> SQL Editor -> Bấm RUN
 -- ==========================================================
 
+-- Tự động dọn dẹp bảng cũ nếu có (Tránh lỗi trùng ID khi chạy lại)
+DROP TABLE IF EXISTS quote_request_images CASCADE;
+DROP TABLE IF EXISTS quote_requests CASCADE;
+DROP TABLE IF EXISTS product_images CASCADE;
+DROP TABLE IF EXISTS products CASCADE;
+DROP TABLE IF EXISTS services CASCADE;
+DROP TABLE IF EXISTS project_images CASCADE;
+DROP TABLE IF EXISTS projects CASCADE;
+DROP TABLE IF EXISTS articles CASCADE;
+DROP TABLE IF EXISTS article_categories CASCADE;
+DROP TABLE IF EXISTS categories CASCADE;
+DROP TABLE IF EXISTS reviews CASCADE;
+DROP TABLE IF EXISTS site_settings CASCADE;
+DROP TABLE IF EXISTS admins CASCADE;
+
 -- 1. Bảng admins (Tài khoản quản trị)
 CREATE TABLE IF NOT EXISTS admins (
   id SERIAL PRIMARY KEY,
