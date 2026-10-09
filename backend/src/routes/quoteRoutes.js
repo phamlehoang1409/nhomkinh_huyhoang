@@ -4,9 +4,10 @@ const quoteController = require('../controllers/quoteController');
 const { authMiddleware } = require('../middleware/auth');
 const upload = require('../middleware/upload');
 const { quoteLimiter } = require('../middleware/rateLimiter');
+const { honeypotCheck } = require('../middleware/security');
 
-// Public submit (with optional multiple image upload & rate limiting)
-router.post('/', quoteLimiter, upload.array('images', 5), quoteController.createQuoteRequest);
+// Public submit (Rate limit 5req/30m + Honeypot + File upload max 3 files)
+router.post('/', quoteLimiter, upload.array('images', 3), honeypotCheck, quoteController.createQuoteRequest);
 
 // Protected (Admin)
 router.get('/', authMiddleware, quoteController.getQuoteRequests);

@@ -1,11 +1,13 @@
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
 const path = require('path');
 const fs = require('fs');
 require('dotenv').config();
 
 const { initDatabase } = require('./config/db');
 const { apiLimiter } = require('./middleware/rateLimiter');
+const { requestSanitizer } = require('./middleware/security');
 
 // Import routes
 const authRoutes = require('./routes/authRoutes');
@@ -24,34 +26,43 @@ const uploadRoutes = require('./routes/uploadRoutes');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Ensure upload directory exists
+// 1. Tăng cường bảo mật Header HTTP với Helmet & ẩn X-Powered-By
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
+app.disable('x-powered-by');
+
+// 2. Ensure upload directory exists
 const uploadDir = path.join(__dirname, '..', 'uploads');
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-// Middleware
+// 3. CORS Policy
 app.use(cors({
-  origin: '*', // Allow all origins for development and deployment flexibility
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-app.use(express.json({ limit: '20mb' }));
-app.use(express.urlencoded({ extended: true, limit: '20mb' }));
+// 4. Giới hạn dung lượng Payload tối đa 5MB chống tấn công tràn bộ nhớ (Payload Overflow)
+app.use(express.json({ limit: '5mb' }));
+app.use(express.urlencoded({ extended: true, limit: '5mb' }));
 
-// Apply general rate limiter
+// 5. Làm sạch dữ liệu đầu vào toàn bộ request (Chống SQL Injection / XSS)
+app.use(requestSanitizer);
+
+// 6. Giới hạn tần suất gọi API chung (Chống cào dữ liệu & DDOS)
 app.use('/api/', apiLimiter);
 
-// Serve static uploaded files
+// 7. Serve static uploaded files
 app.use('/uploads', express.static(uploadDir));
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
-    timestamp: new Date().toISOString(),
-    service: 'Nhôm Kính Huy Hoàng API Server',
+    service: 'Nhôm Kính Huy Hoàng Secure API Server',
     version: '1.0.0'
   });
 });
@@ -91,7 +102,7 @@ app.get('/sitemap.xml', async (req, res) => {
   }
 });
 
-// Robots.txt helper
+// Robots.txt
 app.get('/robots.txt', (req, res) => {
   res.type('text/plain');
   res.send(`User-agent: *\nAllow: /\nDisallow: /admin\nSitemap: ${(process.env.CLIENT_URL || 'http://localhost:5173')}/sitemap.xml`);
@@ -107,7 +118,7 @@ app.use('/api/*', (req, res) => {
 
 // Global Error Handler
 app.use((err, req, res, next) => {
-  console.error('Server error:', err);
+  console.error('Server error:', err.message);
   res.status(err.status || 500).json({
     success: false,
     message: err.message || 'Đã có lỗi máy chủ nội bộ xảy ra.'
@@ -118,7 +129,7 @@ app.use((err, req, res, next) => {
 async function startServer() {
   await initDatabase();
   app.listen(PORT, () => {
-    console.log(`🚀 Máy chủ Backend Nhôm Kính Huy Hoàng đang chạy tại cổng ${PORT}`);
+    console.log(`🛡️ Máy chủ Bảo Mật Backend Nhôm Kính Huy Hoàng đang chạy tại cổng ${PORT}`);
     console.log(`📡 URL API: http://localhost:${PORT}/api`);
   });
 }

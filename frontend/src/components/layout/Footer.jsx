@@ -146,12 +146,11 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-          <p>© {new Date().getFullYear()} Nhôm Kính Huy Hoàng - Thọ Xuân, Thanh Hóa. Tất cả các quyền được bảo lưu.</p>
+          <p>© {new Date().getFullYear()} Nhôm Kính Huy Hoàng - Thọ Xuân, Thanh Hóa. Hotline: {settings.hotline || '0978398567'}.</p>
           <div className="flex items-center space-x-6">
             <Link to="/gioi-thieu" className="hover:text-slate-300">Giới thiệu</Link>
             <Link to="/chinh-sach" className="hover:text-slate-300">Chính sách</Link>
             <Link to="/lien-he" className="hover:text-slate-300">Liên hệ</Link>
-            <Link to="/admin/login" className="hover:text-amber-400">Đăng nhập Quản trị</Link>
           </div>
         </div>
       </div>

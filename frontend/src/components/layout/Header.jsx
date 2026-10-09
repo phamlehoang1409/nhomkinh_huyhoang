@@ -74,13 +74,6 @@ export default function Header() {
               {isDark ? <Sun className="w-3.5 h-3.5 text-amber-400" /> : <Moon className="w-3.5 h-3.5 text-slate-700" />}
               <span className="hidden sm:inline font-semibold">{isDark ? 'Sáng' : 'Tối'}</span>
             </button>
-
-            <Link
-              to="/admin/login"
-              className="hidden lg:inline-block text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 text-xs border-l border-slate-300 dark:border-slate-700 pl-3"
-            >
-              Quản trị
-            </Link>
           </div>
         </div>
       </div>
