@@ -154,11 +154,11 @@ CREATE TABLE IF NOT EXISTS `site_settings` (
 -- DỮ LIỆU MẪU BAN ĐẦU (SEED DATA)
 -- ==========================================================
 
--- Mật khẩu mặc định của admin: admin@123 (hash bcrypt: $2a$10$7v1Yx5pC1m.. or generated)
+-- Mật khẩu mặc định của admin: admin@123 (hash bcrypt)
 -- Tài khoản quản trị ban đầu
 INSERT INTO `admins` (`username`, `password_hash`, `full_name`, `email`, `role`)
-VALUES ('admin', '$2a$10$oXjSj0qYkQ71p/3l.yO5UeKz2E1rT3XQcW7M2wY4Zf6N4bL8bO4iW', 'Quản Trị Viên Huy Hoàng', 'huyhoangnhomkinh@gmail.com', 'superadmin')
-ON DUPLICATE KEY UPDATE `username`=`username`;
+VALUES ('admin', '$2a$10$msm6r6J1flHu5oG.j.HoY.0rOgPU9GOaES0FNQn2bpg7kC9/9w6Yq', 'Quản Trị Viên Huy Hoàng', 'huyhoangnhomkinh@gmail.com', 'superadmin')
+ON DUPLICATE KEY UPDATE `password_hash`=VALUES(`password_hash`), `full_name`=VALUES(`full_name`);
 
 -- Danh mục sản phẩm
 INSERT INTO `categories` (`id`, `name`, `slug`, `description`, `display_order`) VALUES
