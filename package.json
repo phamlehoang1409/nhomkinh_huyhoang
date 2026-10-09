@@ -1,0 +1,22 @@
+{
+  "name": "nhomkinh-huyhoang",
+  "version": "1.0.0",
+  "description": "Website Doanh Nghiệp Nhôm Kính Huy Hoàng - Thanh Hóa",
+  "scripts": {
+    "dev:backend": "cd backend && npm start",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "install:all": "cd backend && npm install && cd ../frontend && npm install"
+  },
+  "keywords": [
+    "nhomkinh",
+    "huyhoang",
+    "thanhhoa",
+    "xingfa",
+    "react",
+    "nodejs",
+    "mysql"
+  ],
+  "author": "Nhôm Kính Huy Hoàng",
+  "license": "ISC"
+}
