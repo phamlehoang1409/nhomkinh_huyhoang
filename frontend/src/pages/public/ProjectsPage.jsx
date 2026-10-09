@@ -6,13 +6,104 @@ import Pagination from '../../components/common/Pagination';
 import { Search, MapPin, Calendar, X, Layers, Image as ImageIcon } from 'lucide-react';
 import { useSite } from '../../context/SiteContext';
 
+const DEFAULT_PROJECTS = [
+  {
+    id: 1,
+    title: 'Thi công hệ thống cửa nhôm Xingfa nhà phố Thọ Xuân',
+    slug: 'thi-cong-he-thong-cua-nhom-xingfa-nha-pho-tho-xuan',
+    category: 'Cửa nhôm kính',
+    client_name: 'Gia đình anh Tuấn',
+    location: 'Thị trấn Thọ Xuân, Thanh Hóa',
+    completion_date: 'Tháng 03/2026',
+    description: 'Công trình nhà phố 3 tầng bao gồm cửa đi 4 cánh mặt tiền Xingfa hệ 55 ghi xám, cửa sổ mở hất và cửa thông phòng, hoàn thiện đúng tiến độ và nghiệm thu đạt chuẩn thẩm mỹ cao.',
+    main_image: 'https://images.unsplash.com/photo-1534237710431-e2fc698436d0?auto=format&fit=crop&w=800&q=80',
+    gallery_images: [
+      'https://images.unsplash.com/photo-1534237710431-e2fc698436d0?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80'
+    ]
+  },
+  {
+    id: 2,
+    title: 'Lắp đặt cửa đi 4 cánh nhôm Xingfa mở quay biệt thự',
+    slug: 'lap-dat-cua-di-4-canh-nhom-xingfa-mo-quay-biet-thu',
+    category: 'Cửa nhôm kính',
+    client_name: 'Gia đình anh Hoàng',
+    location: 'Thọ Hải, Thọ Xuân, Thanh Hóa',
+    completion_date: 'Tháng 02/2026',
+    description: 'Hạng mục cửa đi chính 4 cánh nhôm Xingfa nhập khẩu tem đỏ hệ 55 màu nâu cafe sang trọng kết hợp kính dán an toàn 8.38mm phôi Việt Nhật.',
+    main_image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+    gallery_images: [
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1534237710431-e2fc698436d0?auto=format&fit=crop&w=800&q=80'
+    ]
+  },
+  {
+    id: 3,
+    title: 'Lắp đặt cửa kính thủy lực và vách ngăn văn phòng',
+    slug: 'lap-dat-cua-kinh-thuy-luc-vach-ngan-van-phong-thanh-hoa',
+    category: 'Vách kính cường lực',
+    client_name: 'Công ty CP Xây Dựng & Thương Mại',
+    location: 'TP. Thanh Hóa',
+    completion_date: 'Tháng 02/2026',
+    description: 'Hạng mục gồm 120m2 vách kính ngăn phòng họp và 2 bộ cửa kính thủy lực bản lề sàn 12mm tay nắm Inox sang trọng.',
+    main_image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
+    gallery_images: [
+      'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80'
+    ]
+  },
+  {
+    id: 4,
+    title: 'Thi công cabin phòng tắm kính đứng 135 độ khách sạn',
+    slug: 'thi-cong-cabin-phong-tam-kinh-dung-135-do-khach-san',
+    category: 'Vách kính cường lực',
+    client_name: 'Khách sạn Sao Mai',
+    location: 'Triệu Sơn, Thanh Hóa',
+    completion_date: 'Tháng 01/2026',
+    description: 'Lắp đặt 15 bộ phòng tắm kính vát góc 135 độ phụ kiện Inox 304 bóng gương cao cấp, gioăng từ chống tràn nước tuyệt đối.',
+    main_image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80',
+    gallery_images: [
+      'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80'
+    ]
+  },
+  {
+    id: 5,
+    title: 'Thi công lan can ban công kính và mái kính sảnh biệt thự',
+    slug: 'thi-cong-lan-can-kinh-mai-kinh-sanh-biet-thu-yen-dinh',
+    category: 'Lan can & Mái kính',
+    client_name: 'Biệt thự gia đình chú Hùng',
+    location: 'Yên Định, Thanh Hóa',
+    completion_date: 'Tháng 01/2026',
+    description: 'Lắp đặt 45m lan can kính cường lực tay vịn inox 304 trụ lửng và 1 mái kính nghệ thuật sân trước tạo điểm nhấn đẳng cấp cho căn biệt thự.',
+    main_image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
+    gallery_images: [
+      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80'
+    ]
+  },
+  {
+    id: 6,
+    title: 'Lắp đặt cầu thang kính tay vịn gỗ Lim Nam Phi',
+    slug: 'lap-dat-cau-thang-kinh-tay-vin-go-lim-nam-phi',
+    category: 'Lan can & Mái kính',
+    client_name: 'Gia đình bác Quang',
+    location: 'Thọ Xuân, Thanh Hóa',
+    completion_date: 'Tháng 12/2025',
+    description: 'Cầu thang kính cường lực 10mm chân trụ ngàm Inox đúc liền kết hợp tay vịn gỗ Lim Nam Phi bo cạnh bóng đẹp chắc chắn.',
+    main_image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80',
+    gallery_images: [
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80'
+    ]
+  }
+];
+
 export default function ProjectsPage() {
   const { openQuoteModal } = useSite();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState('all');
   const [search, setSearch] = useState('');
-  const [pagination, setPagination] = useState({ page: 1, limit: 9, total: 0, totalPages: 1 });
+  const [pagination, setPagination] = useState({ page: 1, limit: 9, total: 6, totalPages: 1 });
   const [selectedProject, setSelectedProject] = useState(null);
 
   const categories = [
@@ -31,12 +122,34 @@ export default function ProjectsPage() {
         category: activeCategory !== 'all' ? activeCategory : undefined,
         search: search || undefined
       });
-      if (res.data?.success) {
+      if (res.data?.success && Array.isArray(res.data.data) && res.data.data.length > 0) {
         setProjects(res.data.data);
         setPagination(res.data.pagination);
+      } else {
+        // Fallback default sample projects
+        let filtered = [...DEFAULT_PROJECTS];
+        if (activeCategory !== 'all') {
+          filtered = filtered.filter(p => p.category === activeCategory);
+        }
+        if (search.trim()) {
+          const s = search.toLowerCase();
+          filtered = filtered.filter(p => p.title.toLowerCase().includes(s) || p.location.toLowerCase().includes(s));
+        }
+        setProjects(filtered);
+        setPagination({ page: 1, limit: 9, total: filtered.length, totalPages: 1 });
       }
     } catch (err) {
-      console.error('Error loading projects:', err);
+      console.error('Error loading projects, using fallback list:', err);
+      let filtered = [...DEFAULT_PROJECTS];
+      if (activeCategory !== 'all') {
+        filtered = filtered.filter(p => p.category === activeCategory);
+      }
+      if (search.trim()) {
+        const s = search.toLowerCase();
+        filtered = filtered.filter(p => p.title.toLowerCase().includes(s) || p.location.toLowerCase().includes(s));
+      }
+      setProjects(filtered);
+      setPagination({ page: 1, limit: 9, total: filtered.length, totalPages: 1 });
     } finally {
       setLoading(false);
     }

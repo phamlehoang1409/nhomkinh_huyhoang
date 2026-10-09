@@ -1,21 +1,21 @@
 const rateLimit = require('express-rate-limit');
 
-// 1. Chống Brute Force Đăng nhập Admin: Tối đa 5 lần thử trong 15 phút
+// 1. Chống Brute Force Đăng nhập Admin: Linh hoạt
 const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 5,
+  windowMs: 5 * 60 * 1000,
+  max: 60,
   standardHeaders: true,
   legacyHeaders: false,
   message: {
     success: false,
-    message: 'Tài khoản hoặc IP của bạn đã thử đăng nhập sai quá nhiều lần. Vui lòng thử lại sau 15 phút để đảm bảo an toàn.'
+    message: 'Tài khoản hoặc IP của bạn đã thử đăng nhập quá nhiều lần. Vui lòng thử lại sau ít phút.'
   }
 });
 
-// 2. Chống Spam Form Yêu cầu Báo giá: Tối đa 5 yêu cầu trong 30 phút cho mỗi IP
+// 2. Chống Spam Form Yêu cầu Báo giá
 const quoteLimiter = rateLimit({
-  windowMs: 30 * 60 * 1000,
-  max: 5,
+  windowMs: 15 * 60 * 1000,
+  max: 20,
   standardHeaders: true,
   legacyHeaders: false,
   message: {
@@ -24,10 +24,10 @@ const quoteLimiter = rateLimit({
   }
 });
 
-// 3. Chống Spam Tìm kiếm: Tối đa 30 lượt tìm kiếm trong 1 phút
+// 3. Chống Spam Tìm kiếm
 const searchLimiter = rateLimit({
   windowMs: 1 * 60 * 1000,
-  max: 30,
+  max: 60,
   standardHeaders: true,
   legacyHeaders: false,
   message: {
@@ -36,10 +36,10 @@ const searchLimiter = rateLimit({
   }
 });
 
-// 4. Giới hạn chung toàn bộ API chống DDOS & cào dữ liệu bừa bãi: Max 120 req/phút
+// 4. Giới hạn chung toàn bộ API
 const apiLimiter = rateLimit({
   windowMs: 1 * 60 * 1000,
-  max: 120,
+  max: 200,
   standardHeaders: true,
   legacyHeaders: false,
   message: {

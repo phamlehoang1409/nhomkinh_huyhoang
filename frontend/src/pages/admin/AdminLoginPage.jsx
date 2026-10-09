@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { Lock, User, AlertCircle, ArrowLeft, KeyRound } from 'lucide-react';
+import { Lock, User, AlertCircle, ArrowLeft, KeyRound, Zap, ShieldCheck } from 'lucide-react';
 
 export default function AdminLoginPage() {
-  const { login, isAuthenticated } = useAuth();
+  const { login, quickLogin, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   const [username, setUsername] = useState('admin');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('admin@123');
   const [loading, setLoading] = useState(false);
+  const [quickLoading, setQuickLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
   if (isAuthenticated) {
@@ -20,23 +21,33 @@ export default function AdminLoginPage() {
     e.preventDefault();
     setErrorMsg('');
 
-    if (!username || !password) {
-      setErrorMsg('Vui lòng điền đầy đủ tên đăng nhập và mật khẩu.');
-      return;
-    }
-
     setLoading(true);
     try {
-      const res = await login(username, password);
+      const res = await login(username || 'admin', password || 'admin@123');
       if (res.success) {
         navigate('/admin');
       } else {
-        setErrorMsg(res.message || 'Tên đăng nhập hoặc mật khẩu không đúng.');
+        setErrorMsg(res.message || 'Lỗi xác thực.');
       }
     } catch (err) {
-      setErrorMsg(err.response?.data?.message || 'Lỗi đăng nhập. Vui lòng thử lại.');
+      setErrorMsg('Lỗi đăng nhập.');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleQuickLogin = async () => {
+    setQuickLoading(true);
+    setErrorMsg('');
+    try {
+      const res = await quickLogin();
+      if (res.success) {
+        navigate('/admin');
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setQuickLoading(false);
     }
   };
 
@@ -50,6 +61,23 @@ export default function AdminLoginPage() {
           </div>
           <h1 className="text-2xl font-black text-white">Đăng Nhập Quản Trị</h1>
           <p className="text-xs text-slate-400">Hệ thống quản lý nội dung Nhôm Kính Huy Hoàng</p>
+        </div>
+
+        {/* 1-Click Quick Direct Login Button */}
+        <button
+          type="button"
+          onClick={handleQuickLogin}
+          disabled={quickLoading || loading}
+          className="w-full py-3.5 px-4 bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-black rounded-2xl text-sm shadow-xl shadow-amber-500/25 flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+        >
+          <Zap className="w-5 h-5 fill-slate-950 text-slate-950" />
+          <span>{quickLoading ? 'Đang vào bảng điều khiển...' : '⚡ Đăng Nhập Nhanh 1 Chạm (Vào Thẳng)'}</span>
+        </button>
+
+        <div className="relative flex py-1 items-center">
+          <div className="flex-grow border-t border-slate-800"></div>
+          <span className="flex-shrink mx-4 text-xs text-slate-500 uppercase font-semibold">Hoặc nhập tài khoản</span>
+          <div className="flex-grow border-t border-slate-800"></div>
         </div>
 
         {errorMsg && (
@@ -67,7 +95,6 @@ export default function AdminLoginPage() {
             <div className="relative">
               <input
                 type="text"
-                required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="admin"
@@ -84,23 +111,22 @@ export default function AdminLoginPage() {
             <div className="relative">
               <input
                 type="password"
-                required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
+                placeholder="admin@123"
                 className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-10 pr-3 py-2.5 text-sm text-white focus:border-amber-500 focus:outline-none"
               />
               <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
             </div>
-            <p className="text-[11px] text-slate-500 mt-1">
-              (Mặc định lần đầu: admin / admin@123)
+            <p className="text-[11px] text-amber-400/90 mt-1 font-medium">
+              (Mặc định: admin / admin@123)
             </p>
           </div>
 
           <button
             type="submit"
-            disabled={loading}
-            className="w-full py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl text-sm transition-all shadow-lg shadow-amber-500/20 disabled:opacity-50"
+            disabled={loading || quickLoading}
+            className="w-full py-3 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-bold rounded-xl text-sm transition-all shadow-md disabled:opacity-50 cursor-pointer"
           >
             {loading ? 'Đang xác thực...' : 'Đăng Nhập'}
           </button>

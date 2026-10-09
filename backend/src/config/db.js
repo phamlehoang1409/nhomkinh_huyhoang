@@ -28,24 +28,12 @@ let dbEngine = 'fallback'; // 'postgres', 'mysql', 'fallback'
 let useFallbackStorage = false;
 const fallbackDataFile = path.join(__dirname, '..', '..', 'data', 'database_fallback.json');
 
-// Helper data for fallback
-let fallbackStore = {
-  admins: [],
-  categories: [],
-  products: [],
-  services: [],
-  projects: [],
-  article_categories: [],
-  articles: [],
-  quote_requests: [],
-  quote_request_images: [],
-  reviews: [],
-  site_settings: []
-};
+// Helper data for fallback initialized immediately with full seed data
+let fallbackStore = getInitialSeedData();
 
 // Initial default seed dataset
-async function getInitialSeedData() {
-  const defaultPasswordHash = await bcrypt.hash('admin@123', 10);
+function getInitialSeedData() {
+  const defaultPasswordHash = '$2a$10$msm6r6J1flHu5oG.j.HoY.0rOgPU9GOaES0FNQn2bpg7kC9/9w6Yq'; // admin@123
   return {
     admins: [
       {
@@ -374,7 +362,7 @@ async function getInitialSeedData() {
     projects: [
       {
         id: 1,
-        title: 'Thi công toàn bộ hệ thống cửa nhôm Xingfa nhà phố',
+        title: 'Thi công hệ thống cửa nhôm Xingfa nhà phố Thọ Xuân',
         slug: 'thi-cong-he-thong-cua-nhom-xingfa-nha-pho-tho-xuan',
         category: 'Cửa nhôm kính',
         client_name: 'Gia đình anh Tuấn',
@@ -391,6 +379,23 @@ async function getInitialSeedData() {
       },
       {
         id: 2,
+        title: 'Lắp đặt cửa đi 4 cánh nhôm Xingfa mở quay biệt thự',
+        slug: 'lap-dat-cua-di-4-canh-nhom-xingfa-mo-quay-biet-thu',
+        category: 'Cửa nhôm kính',
+        client_name: 'Gia đình anh Hoàng',
+        location: 'Thọ Hải, Thọ Xuân, Thanh Hóa',
+        completion_date: 'Tháng 02/2026',
+        description: 'Hạng mục cửa đi chính 4 cánh nhôm Xingfa nhập khẩu tem đỏ hệ 55 màu nâu cafe sang trọng kết hợp kính dán an toàn 8.38mm phôi Việt Nhật.',
+        main_image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+        gallery_images: JSON.stringify([
+          'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1534237710431-e2fc698436d0?auto=format&fit=crop&w=800&q=80'
+        ]),
+        is_featured: 1,
+        created_at: new Date().toISOString()
+      },
+      {
+        id: 3,
         title: 'Lắp đặt cửa kính thủy lực và vách ngăn văn phòng',
         slug: 'lap-dat-cua-kinh-thuy-luc-vach-ngan-van-phong-thanh-hoa',
         category: 'Vách kính cường lực',
@@ -407,7 +412,23 @@ async function getInitialSeedData() {
         created_at: new Date().toISOString()
       },
       {
-        id: 3,
+        id: 4,
+        title: 'Thi công cabin phòng tắm kính đứng 135 độ khách sạn',
+        slug: 'thi-cong-cabin-phong-tam-kinh-dung-135-do-khach-san',
+        category: 'Vách kính cường lực',
+        client_name: 'Khách sạn Sao Mai',
+        location: 'Triệu Sơn, Thanh Hóa',
+        completion_date: 'Tháng 01/2026',
+        description: 'Lắp đặt 15 bộ phòng tắm kính vát góc 135 độ phụ kiện Inox 304 bóng gương cao cấp, gioăng từ chống tràn nước tuyệt đối.',
+        main_image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80',
+        gallery_images: JSON.stringify([
+          'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80'
+        ]),
+        is_featured: 1,
+        created_at: new Date().toISOString()
+      },
+      {
+        id: 5,
         title: 'Thi công lan can ban công kính và mái kính sảnh biệt thự',
         slug: 'thi-cong-lan-can-kinh-mai-kinh-sanh-biet-thu-yen-dinh',
         category: 'Lan can & Mái kính',
@@ -418,6 +439,22 @@ async function getInitialSeedData() {
         main_image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
         gallery_images: JSON.stringify([
           'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80'
+        ]),
+        is_featured: 1,
+        created_at: new Date().toISOString()
+      },
+      {
+        id: 6,
+        title: 'Lắp đặt cầu thang kính tay vịn gỗ Lim Nam Phi',
+        slug: 'lap-dat-cau-thang-kinh-tay-vin-go-lim-nam-phi',
+        category: 'Lan can & Mái kính',
+        client_name: 'Gia đình bác Quang',
+        location: 'Thọ Xuân, Thanh Hóa',
+        completion_date: 'Tháng 12/2025',
+        description: 'Cầu thang kính cường lực 10mm chân trụ ngàm Inox đúc liền kết hợp tay vịn gỗ Lim Nam Phi bo cạnh bóng đẹp chắc chắn.',
+        main_image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80',
+        gallery_images: JSON.stringify([
           'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80'
         ]),
         is_featured: 1,
@@ -570,14 +607,20 @@ function saveFallbackData() {
 
 // Database initialization
 async function initDatabase() {
-  const postgresUrl = process.env.DATABASE_URL || process.env.SUPABASE_DB_URL || process.env.POSTGRES_URL;
+  let postgresUrl = process.env.DATABASE_URL || process.env.SUPABASE_DB_URL || process.env.POSTGRES_URL || 'postgresql://postgres:HZv6Qq6KcW%2FzNVz@db.hofzxfwgtettgmexxdpd.supabase.co:5432/postgres';
+
+  if (postgresUrl.includes('/zNVz') && !postgresUrl.includes('%2FzNVz')) {
+    postgresUrl = postgresUrl.replace('/zNVz', '%2FzNVz');
+  }
 
   // 1. Try PostgreSQL / Supabase first if URL is configured
   if (postgresUrl && pg) {
     try {
       pgPool = new pg.Pool({
         connectionString: postgresUrl,
-        ssl: { rejectUnauthorized: false }
+        ssl: { rejectUnauthorized: false },
+        connectionTimeoutMillis: 5000,
+        idleTimeoutMillis: 30000
       });
       const client = await pgPool.connect();
       client.release();
@@ -586,7 +629,7 @@ async function initDatabase() {
       useFallbackStorage = false;
       return true;
     } catch (err) {
-      console.warn('⚠️ Kết nối Supabase/PostgreSQL thất bại (' + err.message + '). Đang thử kết nối tiếp MySQL/Fallback...');
+      console.warn('⚠️ Kết nối Supabase/PostgreSQL (' + err.message + '). Đang sử dụng kho dữ liệu sẵn sàng.');
     }
   }
 

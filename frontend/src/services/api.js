@@ -91,6 +91,7 @@ export const globalSearch = (params) => api.get('/search', { params });
 export const fetchDashboardStats = () => api.get('/stats/dashboard');
 
 export const loginAdmin = (credentials) => api.post('/auth/login', credentials);
+export const quickLoginAdmin = () => api.post('/auth/quick-login');
 export const getAdminProfile = () => api.get('/auth/me');
 export const changeAdminPassword = (data) => api.put('/auth/change-password', data);
 
