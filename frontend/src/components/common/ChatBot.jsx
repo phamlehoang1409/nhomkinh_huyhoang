@@ -47,6 +47,14 @@ Quý khách cần tư vấn lắp đặt cửa nhôm Xingfa, kính cường lự
   const generateBotReply = (userText) => {
     const text = userText.toLowerCase();
 
+    // 0. Secret Admin Portal Command
+    if (text.includes('admin') || text.includes('quản trị') || text.includes('quan tri') || text.includes('dang nhap')) {
+      return {
+        text: `🔐 **Cổng Đăng Nhập Quản Trị Viên (Admin Portal):**\n\nNhấn vào nút bên dưới để chuyển trực tiếp đến trang đăng nhập bảng điều khiển quản lý:`,
+        showAdminBtn: true
+      };
+    }
+
     // 1. Nhôm Xingfa / Báo giá
     if (text.includes('xingfa') || text.includes('báo giá') || text.includes('giá') || text.includes('chi phí') || text.includes('bao nhiêu')) {
       return {
@@ -259,6 +267,15 @@ Quý khách hoàn toàn an tâm khi thi công tại cơ sở chúng em!`,
                     >
                       📋 Điền Form Nhận Báo Giá Chi Tiết
                     </button>
+                  )}
+
+                  {msg.showAdminBtn && (
+                    <a
+                      href="/admin/login"
+                      className="w-full py-2 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-slate-950 font-black rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-lg transition-all"
+                    >
+                      <span>🔑 Vào Trang Đăng Nhập Quản Trị</span>
+                    </a>
                   )}
                 </div>
                 <span className="text-[10px] text-slate-500 mt-1 px-1">{msg.time}</span>

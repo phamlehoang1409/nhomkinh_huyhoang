@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, MapPin, Mail, Clock, ShieldCheck, CheckCircle2, ChevronRight, DoorClosed } from 'lucide-react';
+import { Phone, MapPin, Mail, Clock, ShieldCheck, CheckCircle2, ChevronRight, DoorClosed, Lock } from 'lucide-react';
 import { useSite } from '../../context/SiteContext';
 
 export default function Footer() {
@@ -151,6 +151,13 @@ export default function Footer() {
             <Link to="/gioi-thieu" className="hover:text-slate-300">Giới thiệu</Link>
             <Link to="/chinh-sach" className="hover:text-slate-300">Chính sách</Link>
             <Link to="/lien-he" className="hover:text-slate-300">Liên hệ</Link>
+            <Link 
+              to="/admin/login" 
+              className="text-slate-700 hover:text-amber-400 transition-colors p-1 rounded opacity-40 hover:opacity-100" 
+              title="Cổng quản trị nội bộ"
+            >
+              <Lock className="w-3 h-3" />
+            </Link>
           </div>
         </div>
       </div>

@@ -13,15 +13,43 @@ export default function Header() {
   const [searchKeyword, setSearchKeyword] = useState('');
   const [servicesDropdown, setServicesDropdown] = useState(false);
   const [productsDropdown, setProductsDropdown] = useState(false);
+  const [logoClickCount, setLogoClickCount] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 30);
     };
+    
+    // Secret shortcut: Ctrl + Shift + A or Alt + A to open Admin Login
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') || (e.altKey && e.key.toLowerCase() === 'a')) {
+        e.preventDefault();
+        navigate('/admin/login');
+      }
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [navigate]);
+
+  // Secret Triple-click on Logo to access Admin
+  const handleLogoClick = (e) => {
+    setLogoClickCount((prev) => {
+      const next = prev + 1;
+      if (next >= 3) {
+        e.preventDefault();
+        navigate('/admin/login');
+        return 0;
+      }
+      setTimeout(() => setLogoClickCount(0), 1500);
+      return next;
+    });
+  };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -86,7 +114,7 @@ export default function Header() {
       } border-b border-slate-200 dark:border-slate-800`}>
         <div className="max-w-7xl mx-auto px-3 sm:px-4 flex items-center justify-between gap-3 sm:gap-4">
           {/* Brand Logo */}
-          <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+          <Link to="/" onClick={handleLogoClick} className="flex items-center gap-2.5 sm:gap-3 group shrink-0" title="Nhôm Kính Huy Hoàng">
             <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-tr from-amber-600 via-amber-500 to-yellow-400 p-0.5 shadow-md group-hover:scale-105 transition-transform flex items-center justify-center">
               <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
                 <DoorClosed className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" />

@@ -3,11 +3,11 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  // Default to 'dark' for premium construction feel, or respect user preference
+  // Default to 'light' for crisp, clear readability
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('huyhoang_theme');
     if (saved) return saved;
-    return 'dark';
+    return 'light';
   });
 
   useEffect(() => {
