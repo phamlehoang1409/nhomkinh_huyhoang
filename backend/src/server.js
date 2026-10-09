@@ -125,7 +125,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Start Server
+// Start Server or Export for Serverless
 async function startServer() {
   await initDatabase();
   app.listen(PORT, () => {
@@ -134,6 +134,10 @@ async function startServer() {
   });
 }
 
-startServer();
+if (require.main === module && !process.env.VERCEL) {
+  startServer();
+} else {
+  initDatabase().catch(console.error);
+}
 
 module.exports = app;

@@ -1,4 +1,10 @@
 const mysql = require('mysql2/promise');
+let pg = null;
+try {
+  pg = require('pg');
+} catch (e) {
+  // pg is optional
+}
 const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcryptjs');
@@ -16,7 +22,9 @@ const dbConfig = {
   charset: 'utf8mb4'
 };
 
-let pool = null;
+let mysqlPool = null;
+let pgPool = null;
+let dbEngine = 'fallback'; // 'postgres', 'mysql', 'fallback'
 let useFallbackStorage = false;
 const fallbackDataFile = path.join(__dirname, '..', '..', 'data', 'database_fallback.json');
 
@@ -562,8 +570,28 @@ function saveFallbackData() {
 
 // Database initialization
 async function initDatabase() {
+  const postgresUrl = process.env.DATABASE_URL || process.env.SUPABASE_DB_URL || process.env.POSTGRES_URL;
+
+  // 1. Try PostgreSQL / Supabase first if URL is configured
+  if (postgresUrl && pg) {
+    try {
+      pgPool = new pg.Pool({
+        connectionString: postgresUrl,
+        ssl: { rejectUnauthorized: false }
+      });
+      const client = await pgPool.connect();
+      client.release();
+      console.log('✅ Đã kết nối thành công đến Supabase / PostgreSQL Database!');
+      dbEngine = 'postgres';
+      useFallbackStorage = false;
+      return true;
+    } catch (err) {
+      console.warn('⚠️ Kết nối Supabase/PostgreSQL thất bại (' + err.message + '). Đang thử kết nối tiếp MySQL/Fallback...');
+    }
+  }
+
+  // 2. Try MySQL connection
   try {
-    // Step 1: Connect to MySQL server without database first to ensure DB exists
     const tempConn = await mysql.createConnection({
       host: dbConfig.host,
       port: dbConfig.port,
@@ -574,19 +602,16 @@ async function initDatabase() {
     await tempConn.query(`CREATE DATABASE IF NOT EXISTS \`${dbConfig.database}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`);
     await tempConn.end();
 
-    // Step 2: Create connection pool with database
-    pool = mysql.createPool(dbConfig);
-
-    // Test connection
-    const connection = await pool.getConnection();
+    mysqlPool = mysql.createPool(dbConfig);
+    const connection = await mysqlPool.getConnection();
     console.log('✅ Đã kết nối thành công đến cơ sở dữ liệu MySQL: ' + dbConfig.database);
 
-    // Step 3: Create tables from database.sql
+    // Create tables from database.sql if needed
     const sqlPath = path.join(__dirname, '..', '..', '..', 'database', 'database.sql');
     if (fs.existsSync(sqlPath)) {
       const sqlContent = fs.readFileSync(sqlPath, 'utf8');
       const statements = sqlContent
-        .replace(/\/\*[\s\S]*?\*\/|--.*$/gm, '') // Remove comments
+        .replace(/\/\*[\s\S]*?\*\/|--.*$/gm, '')
         .split(';')
         .map(s => s.trim())
         .filter(s => s.length > 0);
@@ -595,29 +620,67 @@ async function initDatabase() {
         if (statement.toLowerCase().startsWith('create table') || statement.toLowerCase().startsWith('insert into')) {
           try {
             await connection.query(statement);
-          } catch (err) {
-            // Ignore duplicate key or existing table warnings
-          }
+          } catch (e) {}
         }
       }
     }
     connection.release();
+    dbEngine = 'mysql';
     useFallbackStorage = false;
     return true;
   } catch (error) {
     console.warn('⚠️ Không thể kết nối MySQL (' + error.message + '). Đang kích hoạt chế độ lưu trữ dữ liệu sẵn sàng (High-Reliability Fallback Engine).');
-    console.warn('👉 Lưu ý: Khi MySQL đã khởi động, cấu hình thông số tại file backend/.env và khởi động lại server để chuyển sang MySQL.');
+    dbEngine = 'fallback';
     useFallbackStorage = true;
     await loadFallbackData();
     return false;
   }
 }
 
-// Universal query runner supporting both MySQL and High-Reliability Fallback
+// Universal query runner supporting PostgreSQL / Supabase, MySQL and High-Reliability Fallback
 async function query(sql, params = []) {
-  if (!useFallbackStorage && pool) {
+  // PostgreSQL / Supabase
+  if (dbEngine === 'postgres' && pgPool) {
     try {
-      const [results] = await pool.query(sql, params);
+      // Convert ? placeholders to $1, $2, $3 for PostgreSQL
+      let paramIndex = 1;
+      let pgSql = sql.replace(/\?/g, () => `$${paramIndex++}`);
+      
+      // Clean backticks
+      pgSql = pgSql.replace(/`/g, '');
+
+      // For INSERT without RETURNING, append RETURNING id
+      const isInsert = pgSql.trim().toLowerCase().startsWith('insert into');
+      if (isInsert && !pgSql.toLowerCase().includes('returning')) {
+        pgSql += ' RETURNING id';
+      }
+
+      const res = await pgPool.query(pgSql, params);
+      
+      if (isInsert) {
+        return {
+          insertId: res.rows[0] ? res.rows[0].id : null,
+          affectedRows: res.rowCount,
+          rows: res.rows
+        };
+      }
+
+      const isUpdateOrDelete = pgSql.trim().toLowerCase().startsWith('update') || pgSql.trim().toLowerCase().startsWith('delete');
+      if (isUpdateOrDelete) {
+        return { affectedRows: res.rowCount };
+      }
+
+      return res.rows;
+    } catch (err) {
+      console.error('PostgreSQL / Supabase Query Error:', err.message, 'SQL:', sql);
+      throw err;
+    }
+  }
+
+  // MySQL
+  if (dbEngine === 'mysql' && mysqlPool) {
+    try {
+      const [results] = await mysqlPool.query(sql, params);
       return results;
     } catch (err) {
       console.error('MySQL Query Error:', err.message, 'SQL:', sql);
@@ -625,7 +688,7 @@ async function query(sql, params = []) {
     }
   }
 
-  // Handle in-memory / JSON file fallback simulation for standard CRUD
+  // Fallback storage
   return executeFallbackQuery(sql, params);
 }
 
